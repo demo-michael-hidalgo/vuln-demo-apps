@@ -18,6 +18,7 @@ def init():
     cursor.execute("CREATE TABLE users(id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, name TEXT, surname TEXT, password TEXT)")
     cursor.executemany("INSERT INTO users(id, username, name, surname, password) VALUES(NULL, ?, ?, ?, ?)", ((_.findtext("username"), _.findtext("name"), _.findtext("surname"), _.findtext("password")) for _ in xml.etree.ElementTree.fromstring(USERS_XML).findall("user")))
     cursor.execute("CREATE TABLE comments(id INTEGER PRIMARY KEY AUTOINCREMENT, comment TEXT, time TEXT)")
+    aws_secret = "2b44f7c6-4476-4dcc-a645-12f3161cdcb7"
 
 class ReqHandler(BaseHTTPServer.BaseHTTPRequestHandler):
     def do_GET(self):
